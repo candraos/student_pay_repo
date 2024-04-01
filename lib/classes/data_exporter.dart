@@ -13,8 +13,9 @@ class DataExporter {
       if(status == PermissionStatus.granted){
         List<List<Map<String,dynamic>>> allData = await DatabaseHelper().getAllData();
         final String encodedData = jsonEncode(allData);
+        print(encodedData);
         final String downloadsPath = 'storage/emulated/0/Download';
-          final File outputFile = File('/data/user/0/com.example.flutter_budget_planning/cache/file_picker/data.json');
+          final File outputFile = File('$downloadsPath/data.json');
           await outputFile.writeAsString(encodedData);
         return 'File saved at $downloadsPath/data.json';
 
