@@ -40,7 +40,8 @@ class _SavingsPlanState extends State<SavingsPlan> {
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddMoneySpent(plan: plan)));
                                   },
-                                  title: Text("${plan.plan}"),
+                                  title: Text("${plan.name} : ${plan.plan}"),
+                                  subtitle: Text("remaining: ${(plan.plan-plan.moneySpent)}"),
                                   trailing: IconButton(
                                     icon: Icon(Icons.delete),
                                     onPressed: () async{
@@ -63,23 +64,23 @@ class _SavingsPlanState extends State<SavingsPlan> {
                 }
             ),
           ),
-          Consumer<SavingPlanViewModel>(
-            builder: (context,savingPlan,child){
-              savingPlan.getRemaining();
-              return Text("Remaining: ${savingPlan.remaining}",style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-              )
-              );
-            },
-          )
+          // Consumer<SavingPlanViewModel>(
+          //   builder: (context,savingPlan,child){
+          //     savingPlan.getRemaining();
+          //     return Text("Remaining: ${savingPlan.remaining}",style: TextStyle(
+          //         fontSize: 20,
+          //         fontWeight: FontWeight.bold
+          //     )
+          //     );
+          //   },
+          // )
         ],
       ),
 
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
       onPressed: () {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddSavingPlan(id: id,planJson: planJson,)));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddSavingPlan()));
     },
     )
     );

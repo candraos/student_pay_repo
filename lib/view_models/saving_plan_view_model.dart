@@ -34,7 +34,8 @@ class SavingPlanViewModel with ChangeNotifier{
       return SavingPlan(
           id: maps[i]['id'],
           plan: maps[i]['plan'],
-        moneySpent: maps[i]['moneySpent']
+        moneySpent: maps[i]['moneySpent'],
+          name: maps[i]['name']
       );
     });
     getRemaining();

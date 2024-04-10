@@ -36,6 +36,7 @@ class DatabaseHelper {
       await db.execute('''
         CREATE TABLE SavingPlan(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT,
           plan REAL,
           moneySpent REAL
         )

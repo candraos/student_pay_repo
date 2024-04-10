@@ -13,10 +13,13 @@ class AddSavingPlan extends StatefulWidget {
 
 class _AddSavingPlanState extends State<AddSavingPlan> {
   final _planController = TextEditingController();
+  final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     _planController.text = widget.planJson != null? widget.planJson!["plan"].toString() : "";
+    _nameController.text = widget.planJson != null? widget.planJson!["name"].toString() : "";
+
 
     return Scaffold(
       body: Form(
@@ -24,6 +27,24 @@ class _AddSavingPlanState extends State<AddSavingPlan> {
         child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: 'Saving Plan Name',
+
+              ),
+
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter the saving plan name';
+                }
+
+                return null;
+              },
+
+            ),
+
             TextFormField(
               controller: _planController,
               decoration: InputDecoration(
@@ -53,13 +74,13 @@ class _AddSavingPlanState extends State<AddSavingPlan> {
                 if (_formKey.currentState!.validate()) {
 
                   if(widget.id == null || widget.planJson == null){
-                    SavingPlanViewModel().addPlan(SavingPlan(plan: double.parse(_planController.text.trim())));
+                    SavingPlanViewModel().addPlan(SavingPlan(plan: double.parse(_planController.text.trim(),),name: _nameController.text.trim()));
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Saving Plan Added Successfully')),
                     );
                   }
                   else{
-                    SavingPlan newPlan = SavingPlan(id: widget.id!,plan: double.parse(_planController.text.trim()));
+                    SavingPlan newPlan = SavingPlan(id: widget.id!,plan: double.parse(_planController.text.trim()),name: _nameController.text.trim());
                     SavingPlanViewModel().update(widget.id!, newPlan.toJson());
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Saving Plan Updated Successfully')),
