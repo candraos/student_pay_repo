@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_budget_planning/views/expenses_plan.dart';
 import 'package:flutter_budget_planning/views/home.dart';
-import 'package:flutter_budget_planning/views/savings_plan.dart';
+import 'package:flutter_budget_planning/views/saving_plan2.dart';
 import 'package:flutter_budget_planning/views/task_management.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,11 +14,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  List<Widget> _widgetOptions = <Widget>[
    Home(),
     ExpensesPlan(),
     TaskManagement(),
-    SavingsPlan(),
+     SavingsCalculator(),
   ];
 
   void _onItemTapped(int index) {
