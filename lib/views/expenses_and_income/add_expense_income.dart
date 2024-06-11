@@ -84,12 +84,19 @@ class _AddExpenseIncomeState extends State<AddExpenseIncome> {
                   ievm.addListener(() {
 
                   });
-                  await ievm.insert(ie);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                     SnackBar(content: Text('${widget.isIncome?"Income":"Expense"} Added Successfully')),
-                  );
+                  String feedback = await ievm.insert(ie);
+                  if(feedback == ""){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${widget.isIncome?"Income":"Expense"} Added Successfully')),
+                    );
+                    Navigator.of(context).pop();
+                  }
 
-                  Navigator.of(context).pop();
+                  else
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(feedback)),
+                    );
+
                 }
               },
               child: const Text('Add'),

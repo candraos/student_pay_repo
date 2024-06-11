@@ -21,10 +21,23 @@ Future<int> delete(int id) async{
 }
 
   insert(IncomeExpense incomeExpense)async{
+  if(!incomeExpense.isIncome){
+    await getExpenses();
+    await getIncomes();
+    getTotalExpenses();
+    getTotalIncome();
+    double expenses = incomeExpense.value + totalExpenses;
+    print(expenses);
+    print(totalIncome);
+    if(expenses > totalIncome){
+      return "Expenses cannot be greater than income";
+    }
+  }
     await _helper.insertValue("IncomeExpense", incomeExpense.toJson());
      incomeExpense.isIncome ? await getIncomes() : await getExpenses();
      await getExpensesDataMap();
     notifyListeners();
+    return "";
 
   }
 
